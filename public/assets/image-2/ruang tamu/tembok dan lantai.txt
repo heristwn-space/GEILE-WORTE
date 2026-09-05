@@ -1,0 +1,53 @@
+svg 
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="600" height="337" style="background: #eee; border: 2px solid #ccc;">
+  <path d="M 0,0 L 795,0 L 795,435 L 0,865 Z" fill="rgba(239, 68, 68, 0.5)" stroke="#dc2626" stroke-width="5"/>
+  
+  <path d="M 795,0 L 1920,0 L 1920,770 L 795,435 Z" fill="rgba(59, 130, 246, 0.5)" stroke="#2563eb" stroke-width="5"/>
+  
+  <path d="M 0,865 L 795,435 L 1920,770 L 1920,1080 L 0,1080 Z" fill="rgba(34, 197, 94, 0.5)" stroke="#16a34a" stroke-width="5"/>
+</svg>
+==================================================================
+code 
+
+export default function MapBackground() {
+  return (
+    <div className="relative w-full max-w-5xl" style={{ aspectRatio: '16/9' }}>
+      {/* Gambar latar belakang utama Anda */}
+      <img 
+        src="/images/ruang-tamu-full.png" 
+        className="w-full h-full absolute top-0 left-0"
+        style={{ pointerEvents: 'none' }}
+      />
+
+      {/* Lapisan SVG untuk klik Tembok dan Lantai */}
+      <svg 
+        viewBox="0 0 1920 1080" 
+        className="absolute top-0 left-0 w-full h-full"
+      >
+        {/* TEMBOK KIRI */}
+        <path 
+          d="M 0,0 L 795,0 L 795,435 L 0,865 Z"
+          fill="rgba(0, 0, 0, 0.2)" // Ganti warna dasar di sini (misal hitam transparan untuk efek grayscale)
+          className="cursor-pointer hover:fill-transparent transition-colors duration-300" // Saat di-hover, warna penutup hilang (menjadi berwarna asli)
+          onClick={() => alert("Kuis: Apa bahasa Jerman dari Tembok/Dinding?")}
+        />
+
+        {/* TEMBOK KANAN */}
+        <path 
+          d="M 795,0 L 1920,0 L 1920,770 L 795,435 Z"
+          fill="rgba(0, 0, 0, 0.2)"
+          className="cursor-pointer hover:fill-transparent transition-colors duration-300"
+          onClick={() => alert("Kuis: Apa bahasa Jerman dari Tembok/Dinding?")}
+        />
+
+        {/* LANTAI */}
+        <path 
+          d="M 0,865 L 795,435 L 1920,770 L 1920,1080 L 0,1080 Z"
+          fill="rgba(0, 0, 0, 0.2)" // Berikan warna di sini
+          className="cursor-pointer hover:fill-transparent transition-colors duration-300"
+          onClick={() => alert("Kuis: Apa bahasa Jerman dari Lantai?")}
+        />
+      </svg>
+    </div>
+  );
+}

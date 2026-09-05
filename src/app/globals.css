@@ -1,5 +1,17 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: 'Adigiana-Toybox';
+  src: url('/assets/font/Adigiana-Toybox-Regular/AdigianaUI.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+.font-adigiana {
+  font-family: 'Adigiana-Toybox', sans-serif;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -12,15 +24,78 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Doodle grid overlay background */
+.doodle-grid {
+  background-size: 32px 32px;
+  background-image: 
+    linear-gradient(to right, rgba(0, 0, 0, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
+}
+
+/* Floating animation for login/register design */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-20px) rotate(8deg);
+  }
+}
+
+.animate-float-slow {
+  animation: float 8s ease-in-out infinite;
+}
+
+.animate-float-medium {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-float-fast {
+  animation: float 4s ease-in-out infinite;
+}
+
+/* Thick white text outline style for cartoon title */
+.text-stroke-white {
+  -webkit-text-stroke: 6px white;
+  text-stroke: 6px white;
+  paint-order: stroke fill;
+  text-shadow: 0px 6px 0px rgba(0, 0, 0, 0.2);
+}
+
+/* Sound wave ripple keyframes and animations */
+@keyframes ripple-effect {
+  0% {
+    transform: scale(0.9);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1.8);
+    opacity: 0;
+  }
+}
+
+.animate-ripple {
+  animation: ripple-effect 1.8s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+
+/* Bouncing animation for Title */
+@keyframes playful-bounce {
+  0%, 100% {
+    transform: translateY(0px) scaleY(1);
+  }
+  50% {
+    transform: translateY(-12px) scaleY(0.95);
+  }
+}
+
+.animate-playful-bounce {
+  animation: playful-bounce 2s ease-in-out infinite;
 }

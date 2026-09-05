@@ -1,0 +1,37 @@
+<svg width="100%" height="100%" viewBox="0 0 2730 1536" xmlns="http://www.w3.org/2000/svg">
+  <image 
+    href="https://images.prodia.xyz/Gemini_Generated_Image_slnp9islnp9islnp.png" 
+    x="0" 
+    y="0" 
+    width="2730" 
+    height="1536" 
+    preserveAspectRatio="xMidYMid slice"
+  />
+
+  <polygon 
+    id="room-kamar" 
+    points="968,252 505,635 508,865 1438,872 1435,645" 
+    fill="rgba(255, 111, 97, 0.4)" 
+    stroke="#ff6f61" 
+    stroke-width="5"
+    style="cursor: pointer;"
+  />
+
+  <polygon 
+    id="room-ruang-tamu" 
+    points="508,932 511,1445 1428,1442 1435,942" 
+    fill="rgba(33, 150, 243, 0.4)" 
+    stroke="#2196f3" 
+    stroke-width="5"
+    style="cursor: pointer;"
+  />
+
+  <polygon 
+    id="room-dapur" 
+    points="1431,838 1431,872 1478,868 1475,938 1438,935 1431,1392 2078,1395 2065,842" 
+    fill="rgba(76, 175, 80, 0.4)" 
+    stroke="#4caf50" 
+    stroke-width="5"
+    style="cursor: pointer;"
+  />
+</svg>
