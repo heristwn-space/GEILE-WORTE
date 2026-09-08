@@ -215,14 +215,3 @@ Buka peramban web (*browser*) Anda dan akses:
 npm run build
 npm run start
 ```
-
----
-
-## 🔒 Keamanan & Konfigurasi .gitignore
-
-File [`.gitignore`](file:///.gitignore) telah diaudit dan diperkuat dengan standar keamanan terbaik:
-
-- ✅ **Variabel Lingkungan Aman:** Semua file `.env*` diabaikan otomatis sehingga kunci privat tidak akan bocor ke GitHub. File [`.env.example`](file:///.env.example) tetap dipertahankan sebagai acuan bagi developer lain.
-- ✅ **Pencegahan Bloat Repositori:** File rekaman layar / video demo (`*.mp4`, `*.mov`, `*.webm`) yang berukuran besar (>56 MB) otomatis diabaikan agar ukuran repositori Git tetap ringan dan cepat di-clone.
-- ✅ **Pembersihan File Uji/Scratch:** Skrip uji coba lokal (`check-*.js`, `extract.js`, `temp_*`) tidak ikut ter-commit ke repositori utama.
-- ✅ **Pembersihan Metadata OS & IDE:** File cache dari Windows (`Thumbs.db`, `Desktop.ini`), macOS (`.DS_Store`), dan editor (`.vscode/`, `.idea/`) terlindungi dari ketidaksengajaan commit.
