@@ -18,6 +18,7 @@ export default function KitchenQuizScreen({
   const [roomObjects, setRoomObjects] = useState([]); // from 'room' table
   const [solvedObjects, setSolvedObjects] = useState([]); // list of solved object_ids from 'progres'
   const [activeObject, setActiveObject] = useState(null); // the object currently being guessed
+  const [reviewObject, setReviewObject] = useState(null); // solved object shown in read-only review
   const [inputValue, setInputValue] = useState("");
   const [isWrong, setIsWrong] = useState(false);
   const [toast, setToast] = useState(null);
@@ -111,7 +112,12 @@ export default function KitchenQuizScreen({
   };
 
   const handleObjectClick = (objectId) => {
-    if (solvedObjects.includes(objectId)) return;
+    // If already solved: show review modal with the correct German name
+    if (solvedObjects.includes(objectId)) {
+      const obj = roomObjects.find(r => r.object_id === objectId);
+      setReviewObject(obj || { object_id: objectId, name_de: "" });
+      return;
+    }
 
     const obj = roomObjects.find(r => r.object_id === objectId);
     if (obj) {
@@ -254,7 +260,7 @@ export default function KitchenQuizScreen({
 
   const getObjectClass = (objectId) => {
     if (solvedObjects.includes(objectId)) {
-      return "pointer-events-none transition-all duration-300";
+      return "transition-all duration-300 cursor-pointer pointer-events-auto hover:fill-white/10";
     }
     return "stroke-black/20 hover:fill-white/20 transition-all cursor-pointer duration-300";
   };
@@ -262,7 +268,7 @@ export default function KitchenQuizScreen({
   const getObjectProps = (objectId) => {
     const isSolved = solvedObjects.includes(objectId);
     return {
-      onClick: !isSolved ? () => handleObjectClick(objectId) : undefined,
+      onClick: () => handleObjectClick(objectId),
       stroke: isSolved ? "none" : "black",
       strokeWidth: isSolved ? undefined : 2,
       fill: "transparent", // Keep interactive overlays transparent
@@ -1074,6 +1080,29 @@ export default function KitchenQuizScreen({
                 className="w-full bg-[#ff6f61] border-3 border-zinc-900 rounded-full py-3.5 px-8 text-white font-extrabold hover:scale-105 active:scale-95 transition-all shadow-[4px_4px_0px_0px_#18181b] cursor-pointer text-lg"
               >
                 Zurück zum Menü
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* REVIEW MODAL — shows correct German name for already-solved objects */}
+        {reviewObject && (
+          <div className="absolute inset-0 z-40 bg-zinc-950/60 flex items-center justify-center p-4" onClick={() => setReviewObject(null)}>
+            <div className="w-full max-w-xs bg-white border-4 border-zinc-900 rounded-[2rem] shadow-[8px_8px_0px_0px_#18181b] p-6 text-center" onClick={e => e.stopPropagation()}>
+              {/* Success badge */}
+              <div className="w-14 h-14 bg-green-100 border-3 border-green-500 rounded-full flex items-center justify-center mx-auto mb-3">
+                <svg className="w-7 h-7 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="3.5">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <p className="text-zinc-500 font-bold text-xs uppercase tracking-widest mb-1">Bereits gelöst ✓</p>
+              <h3 className="font-adigiana text-3xl font-black text-zinc-900 mb-5">{reviewObject.name_de}</h3>
+
+              <button
+                onClick={() => setReviewObject(null)}
+                className="w-full bg-[#ff6f61] border-3 border-zinc-900 rounded-full py-2.5 px-6 text-white font-extrabold text-sm hover:scale-105 active:scale-95 transition-all shadow-[3px_3px_0px_0px_#18181b] cursor-pointer"
+              >
+                Schließen
               </button>
             </div>
           </div>
