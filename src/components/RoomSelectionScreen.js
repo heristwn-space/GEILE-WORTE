@@ -532,11 +532,11 @@ export default function RoomSelectionScreen({
           {/* Kamar Click Area */}
           <polygon
             points="968,252 505,635 508,865 1438,872 1435,645"
-            onClick={!rooms.room_kamar ? () => handleRoomClick("room_kamar_tidur", "Schlafzimmer") : undefined}
+            onClick={() => handleRoomClick("room_kamar_tidur", "Schlafzimmer")}
             className={`transition-all duration-300 ${
               !rooms.room_kamar
                 ? "interactive-room-btn fill-white/0 hover:fill-white/10 cursor-pointer pointer-events-auto"
-                : "pointer-events-none fill-none"
+                : "fill-white/0 hover:fill-white/10 cursor-pointer pointer-events-auto"
             }`}
             aria-label="Schlafzimmer"
           />
@@ -544,11 +544,11 @@ export default function RoomSelectionScreen({
           {/* Ruang Tamu Click Area */}
           <polygon
             points="508,932 511,1445 1428,1442 1435,942"
-            onClick={!rooms.room_ruang_tamu ? () => handleRoomClick("room_ruang_tamu", "Wohnzimmer") : undefined}
+            onClick={() => handleRoomClick("room_ruang_tamu", "Wohnzimmer")}
             className={`transition-all duration-300 ${
               !rooms.room_ruang_tamu
                 ? "interactive-room-btn fill-white/0 hover:fill-white/10 cursor-pointer pointer-events-auto"
-                : "pointer-events-none fill-none"
+                : "fill-white/0 hover:fill-white/10 cursor-pointer pointer-events-auto"
             }`}
             aria-label="Wohnzimmer"
           />
@@ -556,106 +556,123 @@ export default function RoomSelectionScreen({
           {/* Dapur Click Area */}
           <polygon
             points="1431,838 1431,872 1478,868 1475,938 1438,935 1431,1392 2078,1395 2065,842"
-            onClick={!rooms.room_dapur ? () => handleRoomClick("room_dapur", "Küche") : undefined}
+            onClick={() => handleRoomClick("room_dapur", "Küche")}
             className={`transition-all duration-300 ${
               !rooms.room_dapur
                 ? "interactive-room-btn fill-white/0 hover:fill-white/10 cursor-pointer pointer-events-auto"
-                : "pointer-events-none fill-none"
+                : "fill-white/0 hover:fill-white/10 cursor-pointer pointer-events-auto"
             }`}
             aria-label="Küche"
           />
 
-          {/* 5. VISUAL LOCK INDICATORS OVERLAYS (UNCLIPPED FOR READABILITY) */}
-          
-          {/* Schlafzimmer Lock */}
-          {!rooms.room_kamar && (
-            <foreignObject
-              x="670"
-              y="410"
-              width="600"
-              height="300"
-              className="overflow-visible pointer-events-none"
-            >
-              <div className="flex flex-col items-center justify-center text-white text-center select-none font-fredoka">
-                <svg
-                  className="w-20 h-20 text-[#ffd8a8] mb-2.5 filter drop-shadow-[0_3px_6px_rgba(0,0,0,0.5)] animate-[pulse_2s_infinite]"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth="2.5"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                <span className="text-4xl md:text-5xl font-black uppercase tracking-wide drop-shadow-[0_3px_3px_rgba(0,0,0,0.8)]">
-                  Schlafzimmer
-                </span>
-                <span className="text-lg md:text-2xl font-bold text-zinc-300 drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)] mt-1">
-                  Mulai Kuis
-                </span>
-              </div>
-            </foreignObject>
-          )}
+          {/* 5. VISUAL OVERLAYS — always visible to show room name and status */}
 
-          {/* Wohnzimmer Lock (ENLARGED) */}
-          {!rooms.room_ruang_tamu && (
-            <foreignObject
-              x="670"
-              y="1030"
-              width="600"
-              height="300"
-              className="overflow-visible pointer-events-none"
-            >
-              <div className="flex flex-col items-center justify-center text-white text-center select-none font-fredoka">
-                <svg
-                  className="w-20 h-20 text-[#ffd8a8] mb-2.5 filter drop-shadow-[0_3px_6px_rgba(0,0,0,0.5)] animate-[pulse_2s_infinite]"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth="2.5"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                <span className="text-4xl md:text-5xl font-black uppercase tracking-wide drop-shadow-[0_3px_3px_rgba(0,0,0,0.8)]">
-                  Wohnzimmer
-                </span>
-                <span className="text-lg md:text-2xl font-bold text-zinc-300 drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)] mt-1">
-                  Mulai Kuis
-                </span>
-              </div>
-            </foreignObject>
-          )}
+          {/* Schlafzimmer Overlay */}
+          <foreignObject
+            x="670"
+            y="410"
+            width="600"
+            height="300"
+            className="overflow-visible pointer-events-none"
+          >
+            <div className="flex flex-col items-center justify-center text-white text-center select-none font-fredoka">
+              {!rooms.room_kamar ? (
+                // Unsolved: show play icon + Mulai Kuis
+                <>
+                  <svg
+                    className="w-20 h-20 text-[#ffd8a8] mb-2.5 filter drop-shadow-[0_3px_6px_rgba(0,0,0,0.5)] animate-[pulse_2s_infinite]"
+                    fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <span className="text-4xl md:text-5xl font-black uppercase tracking-wide drop-shadow-[0_3px_3px_rgba(0,0,0,0.8)]">Schlafzimmer</span>
+                  <span className="text-lg md:text-2xl font-bold text-zinc-300 drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)] mt-1">Mulai Kuis</span>
+                </>
+              ) : (
+                // Solved: show checkmark + room name
+                <>
+                  <div className="w-16 h-16 mb-2 bg-green-400/90 border-4 border-white rounded-full flex items-center justify-center drop-shadow-[0_3px_6px_rgba(0,0,0,0.6)] animate-[pulse_3s_infinite]">
+                    <svg className="w-9 h-9 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="3.5">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <span className="text-4xl md:text-5xl font-black uppercase tracking-wide drop-shadow-[0_3px_3px_rgba(0,0,0,0.8)]">Schlafzimmer</span>
+                  <span className="text-sm md:text-lg font-bold text-green-300 drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)] mt-1">✓ Abgeschlossen</span>
+                </>
+              )}
+            </div>
+          </foreignObject>
 
-          {/* Küche Lock (ENLARGED) */}
-          {!rooms.room_dapur && (
-            <foreignObject
-              x="1450"
-              y="960"
-              width="600"
-              height="300"
-              className="overflow-visible pointer-events-none"
-            >
-              <div className="flex flex-col items-center justify-center text-white text-center select-none font-fredoka">
-                <svg
-                  className="w-20 h-20 text-[#ffd8a8] mb-2.5 filter drop-shadow-[0_3px_6px_rgba(0,0,0,0.5)] animate-[pulse_2s_infinite]"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth="2.5"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                <span className="text-4xl md:text-5xl font-black uppercase tracking-wide drop-shadow-[0_3px_3px_rgba(0,0,0,0.8)]">
-                  Küche
-                </span>
-                <span className="text-lg md:text-2xl font-bold text-zinc-300 drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)] mt-1">
-                  Mulai Kuis
-                </span>
-              </div>
-            </foreignObject>
-          )}
+          {/* Wohnzimmer Overlay */}
+          <foreignObject
+            x="670"
+            y="1030"
+            width="600"
+            height="300"
+            className="overflow-visible pointer-events-none"
+          >
+            <div className="flex flex-col items-center justify-center text-white text-center select-none font-fredoka">
+              {!rooms.room_ruang_tamu ? (
+                <>
+                  <svg
+                    className="w-20 h-20 text-[#ffd8a8] mb-2.5 filter drop-shadow-[0_3px_6px_rgba(0,0,0,0.5)] animate-[pulse_2s_infinite]"
+                    fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <span className="text-4xl md:text-5xl font-black uppercase tracking-wide drop-shadow-[0_3px_3px_rgba(0,0,0,0.8)]">Wohnzimmer</span>
+                  <span className="text-lg md:text-2xl font-bold text-zinc-300 drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)] mt-1">Mulai Kuis</span>
+                </>
+              ) : (
+                <>
+                  <div className="w-16 h-16 mb-2 bg-green-400/90 border-4 border-white rounded-full flex items-center justify-center drop-shadow-[0_3px_6px_rgba(0,0,0,0.6)] animate-[pulse_3s_infinite]">
+                    <svg className="w-9 h-9 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="3.5">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <span className="text-4xl md:text-5xl font-black uppercase tracking-wide drop-shadow-[0_3px_3px_rgba(0,0,0,0.8)]">Wohnzimmer</span>
+                  <span className="text-sm md:text-lg font-bold text-green-300 drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)] mt-1">✓ Abgeschlossen</span>
+                </>
+              )}
+            </div>
+          </foreignObject>
+
+          {/* Küche Overlay */}
+          <foreignObject
+            x="1450"
+            y="960"
+            width="600"
+            height="300"
+            className="overflow-visible pointer-events-none"
+          >
+            <div className="flex flex-col items-center justify-center text-white text-center select-none font-fredoka">
+              {!rooms.room_dapur ? (
+                <>
+                  <svg
+                    className="w-20 h-20 text-[#ffd8a8] mb-2.5 filter drop-shadow-[0_3px_6px_rgba(0,0,0,0.5)] animate-[pulse_2s_infinite]"
+                    fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <span className="text-4xl md:text-5xl font-black uppercase tracking-wide drop-shadow-[0_3px_3px_rgba(0,0,0,0.8)]">Küche</span>
+                  <span className="text-lg md:text-2xl font-bold text-zinc-300 drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)] mt-1">Mulai Kuis</span>
+                </>
+              ) : (
+                <>
+                  <div className="w-16 h-16 mb-2 bg-green-400/90 border-4 border-white rounded-full flex items-center justify-center drop-shadow-[0_3px_6px_rgba(0,0,0,0.6)] animate-[pulse_3s_infinite]">
+                    <svg className="w-9 h-9 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="3.5">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <span className="text-4xl md:text-5xl font-black uppercase tracking-wide drop-shadow-[0_3px_3px_rgba(0,0,0,0.8)]">Küche</span>
+                  <span className="text-sm md:text-lg font-bold text-green-300 drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)] mt-1">✓ Abgeschlossen</span>
+                </>
+              )}
+            </div>
+          </foreignObject>
 
         </svg>
 
