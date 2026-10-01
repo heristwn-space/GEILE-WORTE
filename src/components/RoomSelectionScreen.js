@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { supabase } from "@/utils/supabaseClient";
 import LogoutConfirmModal from "./LogoutConfirmModal";
+import GameFrame from "./GameFrame";
 
 export default function RoomSelectionScreen({
   session,
@@ -170,33 +171,9 @@ export default function RoomSelectionScreen({
   };
 
   return (
-    <div className="relative flex items-center justify-center min-h-screen w-full bg-zinc-950 p-4 overflow-hidden select-none">
-      
-      {/* 1. PORTRAIT ORIENTATION CHECK OVERLAY */}
-      <div className="fixed inset-0 z-[999] flex flex-col items-center justify-center bg-gradient-to-br from-[#ffd8a8] to-[#ff922b] text-zinc-950 text-center p-6 portrait:flex landscape:hidden select-none">
-        <div className="mb-6 border-4 border-zinc-950 p-4 rounded-2xl bg-white shadow-[6px_6px_0px_0px_#18181b] animate-bounce">
-          <svg
-            className="w-16 h-16 text-[#ff6f61] animate-[spin_4s_linear_infinite]"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth="2.5"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"
-            />
-          </svg>
-        </div>
-        <h2 className="text-3xl font-extrabold tracking-tight mb-2">Bitte drehen Sie Ihr Handy!</h2>
-        <p className="text-zinc-800 font-bold max-w-sm">
-          Please rotate your phone to landscape mode to play the game properly.
-        </p>
-      </div>
-
+    <GameFrame>
       {/* 2. ASPECT RATIO CONTAINER (16:9 LOCKED WITH VIEWPONT-HEIGHT CONSTRAINTS) */}
-      <div className="relative w-[min(100%,calc(90vh*16/9))] max-w-[1000px] aspect-video bg-cover bg-center border-4 border-zinc-900 rounded-[2rem] shadow-[12px_12px_0px_0px_rgba(24,24,27,1)] overflow-hidden bg-zinc-950">
+      <div className="relative w-full h-full w-[min(100%,calc(90vh*16/9))] max-w-[1000px] aspect-video bg-cover bg-center overflow-hidden bg-[#a5d8eb]">
         
         {/* TOP LEFT BUTTONS: Menü + Tutorial */}
         <div className="absolute top-4 left-4 z-20 flex items-center gap-2 pointer-events-auto">
@@ -253,13 +230,17 @@ export default function RoomSelectionScreen({
 
         {/* LOADING INDICATOR Overlay */}
         {loading && (
-          <div className="absolute inset-0 bg-white/80 z-40 flex items-center justify-center">
-            <div className="flex flex-col items-center gap-2">
-              <svg className="animate-spin h-10 w-10 text-[#ff6f61]" fill="none" viewBox="0 0 24 24">
+          <div className="absolute inset-0 bg-[#fffdfa]/85 backdrop-blur-[2px] z-40 flex flex-col items-center justify-center gap-3 select-none transition-opacity duration-300 pointer-events-auto">
+            <div className="relative w-12 h-12 md:w-14 md:h-14 flex items-center justify-center bg-white border-2 md:border-3 border-zinc-900 rounded-2xl shadow-[3px_3px_0px_0px_#18181b] animate-bounce">
+              <svg className="w-6 h-6 md:w-7 md:h-7 text-[#ff6f61] animate-spin" fill="none" viewBox="0 0 24 24">
                 <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                 <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
               </svg>
-              <span className="text-zinc-800 font-extrabold text-sm">Synchronisieren...</span>
+            </div>
+            <div className="flex items-center gap-1.5 bg-white/95 border-2 border-zinc-900 rounded-full px-4 py-1.5 shadow-[2px_2px_0px_0px_#18181b]">
+              <span className="font-adigiana text-xs md:text-sm font-black text-zinc-900">
+                Synchronisieren...
+              </span>
             </div>
           </div>
         )}
@@ -685,6 +666,6 @@ export default function RoomSelectionScreen({
         )}
 
       </div>
-    </div>
+    </GameFrame>
   );
 }

@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { supabase } from "@/utils/supabaseClient";
 import LogoutConfirmModal from "./LogoutConfirmModal";
+import GameFrame from "./GameFrame";
 
 export default function MainMenuScreen({
   session,
@@ -73,33 +74,9 @@ export default function MainMenuScreen({
   };
 
   return (
-    <div className="relative flex items-center justify-center min-h-screen w-full bg-zinc-950 p-4 overflow-hidden select-none">
-
-      {/* 1. PORTRAIT ORIENTATION CHECK OVERLAY */}
-      <div className="fixed inset-0 z-[999] flex flex-col items-center justify-center bg-gradient-to-br from-[#ffd8a8] to-[#ff922b] text-zinc-950 text-center p-6 portrait:flex landscape:hidden select-none">
-        <div className="mb-6 border-4 border-zinc-950 p-4 rounded-2xl bg-white shadow-[6px_6px_0px_0px_#18181b] animate-bounce">
-          <svg
-            className="w-16 h-16 text-[#ff6f61] animate-[spin_4s_linear_infinite]"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth="2.5"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"
-            />
-          </svg>
-        </div>
-        <h2 className="text-3xl font-extrabold tracking-tight mb-2">Bitte drehen Sie Ihr Handy!</h2>
-        <p className="text-zinc-800 font-bold max-w-sm">
-          Please rotate your phone to landscape mode to play the game properly.
-        </p>
-      </div>
-
+    <GameFrame>
       {/* 2. ASPECT RATIO CONTAINER (16:9 LOCKED) */}
-      <div className="relative w-[min(100%,calc(90vh*16/9))] max-w-[1000px] aspect-video bg-cover bg-center border-4 border-zinc-900 rounded-[2rem] shadow-[12px_12px_0px_0px_rgba(24,24,27,1)] overflow-hidden bg-[url('/assets/image-fix/background-awal.jpg')]">
+      <div className="relative w-full h-full w-[min(100%,calc(90vh*16/9))] max-w-[1000px] aspect-video bg-cover bg-center overflow-hidden bg-[url('/assets/image-fix/background-awal.jpg')]">
 
         {/* LOGOUT BUTTON (TOP RIGHT) */}
         <button
@@ -334,15 +311,14 @@ export default function MainMenuScreen({
           </div>
         </div>
 
+        {/* LOGOUT CONFIRM MODAL */}
+        {showLogoutModal && (
+          <LogoutConfirmModal
+            onConfirm={handleLogout}
+            onCancel={() => setShowLogoutModal(false)}
+          />
+        )}
       </div>
-
-      {/* LOGOUT CONFIRM MODAL */}
-      {showLogoutModal && (
-        <LogoutConfirmModal
-          onConfirm={handleLogout}
-          onCancel={() => setShowLogoutModal(false)}
-        />
-      )}
-    </div>
+    </GameFrame>
   );
 }

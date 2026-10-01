@@ -99,3 +99,302 @@ body {
 .animate-playful-bounce {
   animation: playful-bounce 2s ease-in-out infinite;
 }
+
+/* ========================================================
+   GAME FRAME & SCENIC ANIMATIONS (Cartoon Nature & Board)
+   ======================================================== */
+
+/* Cloud drift animations */
+@keyframes cloud-drift-slow {
+  0% {
+    transform: translate3d(-20vw, 0, 0);
+  }
+  100% {
+    transform: translate3d(120vw, 0, 0);
+  }
+}
+
+@keyframes cloud-drift-medium {
+  0% {
+    transform: translate3d(-25vw, 0, 0);
+  }
+  100% {
+    transform: translate3d(125vw, 0, 0);
+  }
+}
+
+@keyframes cloud-drift-fast {
+  0% {
+    transform: translate3d(-15vw, 0, 0);
+  }
+  100% {
+    transform: translate3d(115vw, 0, 0);
+  }
+}
+
+.animate-cloud-slow {
+  animation: cloud-drift-slow 65s linear infinite;
+  will-change: transform;
+}
+
+.animate-cloud-medium {
+  animation: cloud-drift-medium 85s linear infinite;
+  animation-delay: -32s;
+  will-change: transform;
+}
+
+.animate-cloud-fast {
+  animation: cloud-drift-fast 50s linear infinite;
+  animation-delay: -15s;
+  will-change: transform;
+}
+
+/* Bird glide animation */
+@keyframes bird-glide {
+  0% {
+    transform: translate3d(-15vw, 25px, 0) scale(0.9);
+  }
+  50% {
+    transform: translate3d(55vw, 10px, 0) scale(0.95);
+  }
+  100% {
+    transform: translate3d(125vw, 28px, 0) scale(0.9);
+  }
+}
+
+.animate-bird-glide {
+  animation: bird-glide 38s ease-in-out infinite;
+  animation-delay: -8s;
+  will-change: transform;
+}
+
+/* Plant and flower gentle breeze */
+@keyframes gentle-sway-left {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(-3deg);
+  }
+}
+
+@keyframes gentle-sway-right {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(3.5deg);
+  }
+}
+
+.animate-sway-left {
+  animation: gentle-sway-left 4.5s ease-in-out infinite;
+  transform-origin: bottom center;
+}
+
+.animate-sway-right {
+  animation: gentle-sway-right 5.5s ease-in-out infinite;
+  transform-origin: bottom center;
+}
+
+/* Leaf fluttering on wooden board */
+@keyframes leaf-breeze {
+  0%, 100% {
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    transform: rotate(4.5deg) scale(1.02);
+  }
+}
+
+.animate-leaf-breeze {
+  animation: leaf-breeze 4.2s ease-in-out infinite;
+  transform-origin: bottom left;
+}
+
+/* Butterfly wing flap and flight path */
+@keyframes butterfly-flap {
+  0%, 100% {
+    transform: scaleX(1);
+  }
+  50% {
+    transform: scaleX(0.25);
+  }
+}
+
+@keyframes butterfly-float {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+  25% {
+    transform: translate3d(14px, -22px, 0) rotate(7deg);
+  }
+  50% {
+    transform: translate3d(24px, -10px, 0) rotate(-5deg);
+  }
+  75% {
+    transform: translate3d(10px, -30px, 0) rotate(6deg);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+}
+
+.animate-butterfly-wing {
+  animation: butterfly-flap 0.35s ease-in-out infinite;
+  transform-origin: center;
+}
+
+.animate-butterfly-path {
+  animation: butterfly-float 15s ease-in-out infinite;
+  will-change: transform;
+}
+
+/* Sakura / petal falling animation */
+@keyframes sakura-fall {
+  0% {
+    transform: translate3d(0, -60px, 0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.9;
+  }
+  80% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translate3d(30px, 110vh, 0) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.animate-sakura-1 {
+  animation: sakura-fall 9s ease-in infinite;
+  animation-delay: 0s;
+  will-change: transform;
+}
+
+.animate-sakura-2 {
+  animation: sakura-fall 11s ease-in infinite;
+  animation-delay: -3s;
+  will-change: transform;
+}
+
+.animate-sakura-3 {
+  animation: sakura-fall 8s ease-in infinite;
+  animation-delay: -6s;
+  will-change: transform;
+}
+
+.animate-sakura-4 {
+  animation: sakura-fall 12s ease-in infinite;
+  animation-delay: -9s;
+  will-change: transform;
+}
+
+/* Star twinkle */
+@keyframes star-twinkle {
+  0%, 100% {
+    opacity: 0.2;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+.animate-star-1 { animation: star-twinkle 2.5s ease-in-out infinite; animation-delay: 0s; }
+.animate-star-2 { animation: star-twinkle 3.2s ease-in-out infinite; animation-delay: -1s; }
+.animate-star-3 { animation: star-twinkle 2.1s ease-in-out infinite; animation-delay: -2s; }
+.animate-star-4 { animation: star-twinkle 4s ease-in-out infinite; animation-delay: -0.5s; }
+
+/* Tree gentle sway */
+@keyframes tree-sway {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  33% {
+    transform: rotate(-1.5deg);
+  }
+  66% {
+    transform: rotate(1deg);
+  }
+}
+
+.animate-tree-sway {
+  animation: tree-sway 7s ease-in-out infinite;
+  transform-origin: bottom center;
+}
+
+.animate-tree-sway-delayed {
+  animation: tree-sway 9s ease-in-out infinite;
+  animation-delay: -3.5s;
+  transform-origin: bottom center;
+}
+
+/* Second bird gliding right to left */
+@keyframes bird-glide-reverse {
+  0% {
+    transform: translate3d(130vw, 15px, 0) scale(0.85) scaleX(-1);
+  }
+  50% {
+    transform: translate3d(50vw, 5px, 0) scale(0.9) scaleX(-1);
+  }
+  100% {
+    transform: translate3d(-15vw, 18px, 0) scale(0.85) scaleX(-1);
+  }
+}
+
+.animate-bird-glide-reverse {
+  animation: bird-glide-reverse 45s ease-in-out infinite;
+  animation-delay: -20s;
+  will-change: transform;
+}
+
+/* Floating sparkle */
+@keyframes sparkle-float {
+  0% { transform: translate3d(0,0,0) rotate(0deg); opacity: 0; }
+  20% { opacity: 1; }
+  80% { opacity: 0.7; }
+  100% { transform: translate3d(-15px, -40px, 0) rotate(180deg); opacity: 0; }
+}
+
+.animate-sparkle {
+  animation: sparkle-float 4s ease-out infinite;
+  animation-delay: -1s;
+}
+
+.animate-sparkle-delayed {
+  animation: sparkle-float 5s ease-out infinite;
+  animation-delay: -2.5s;
+}
+
+/* Accessibility: Turn off animations for prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .animate-cloud-slow,
+  .animate-cloud-medium,
+  .animate-cloud-fast,
+  .animate-bird-glide,
+  .animate-bird-glide-reverse,
+  .animate-sway-left,
+  .animate-sway-right,
+  .animate-leaf-breeze,
+  .animate-butterfly-wing,
+  .animate-butterfly-path,
+  .animate-sakura-1,
+  .animate-sakura-2,
+  .animate-sakura-3,
+  .animate-sakura-4,
+  .animate-star-1,
+  .animate-star-2,
+  .animate-star-3,
+  .animate-star-4,
+  .animate-tree-sway,
+  .animate-tree-sway-delayed,
+  .animate-sparkle,
+  .animate-sparkle-delayed {
+    animation: none !important;
+  }
+}
+
